@@ -5,7 +5,7 @@ const os=require("os")
 const path=require('path')
 // const math=require('./math')
 
-const {add,sub,mul,div}=require('./math')
+const {add,sub,mul,div}=require('../math')
 
 // console.log(os.version(),os.type(),os.homedir());
 // console.log(__dirname,"+",__filename)
