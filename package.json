@@ -1,5 +1,7 @@
 {
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "Node.js Web Server tutorial",
+  "main": "server.js",
   "scripts": {
     "start": "node index",
     "dev": "nodemon index"
