@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
 const errorHandler = require("./middleware/errorHandler");
 
 const { logger } = require("./middleware/logEvents");
@@ -12,24 +13,6 @@ const PORT = process.env.PORT || 3500;
 
 app.use(logger);
 
-//CORS
-const whitelist = [
-  "https://www.google.com",
-  "http://127.0.0.01:5500",
-  "http://localhost:3500",
-];
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    //remove !origin after devolopment
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  optionSuccessStatus: 200,
-};
 app.use(cors(corsOptions));
 
 //built in middleware to handle urlencoded data
@@ -44,10 +27,10 @@ app.use(express.json());
 
 //serve static files
 app.use(express.static(path.join(__dirname, "./public")));
-app.use("/subdir", express.static(path.join(__dirname, "./public")));
+// app.use("/subdir", express.static(path.join(__dirname, "./public")));
 
 app.use("/", require("./routes/root"));
-app.use("/subdir", require("./routes/subdir"));
+// app.use("/subdir", require("./routes/subdir"));
 app.use("/employee", require("./routes/api/employee"));
 
 //Route Handlers
